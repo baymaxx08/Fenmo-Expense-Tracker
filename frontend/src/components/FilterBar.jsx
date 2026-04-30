@@ -2,13 +2,15 @@ import React from 'react';
 
 /**
  * Filter Bar component
- * Allows filtering by category and sorting
+ * Allows filtering by category, date, and sorting
  */
 export function FilterBar({ 
   categories, 
   selectedCategory, 
+  selectedDate,
   sort, 
   onCategoryChange, 
+  onDateChange,
   onSortChange,
   loadedCategories,
 }) {
@@ -16,7 +18,7 @@ export function FilterBar({
 
   return (
     <div className="bg-white rounded-lg shadow-md p-4 mb-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Category Filter */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -40,6 +42,30 @@ export function FilterBar({
           </div>
         </div>
 
+        {/* Date Filter */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Filter by Date
+          </label>
+          <div className="flex gap-2">
+            <input
+              type="date"
+              value={selectedDate || ''}
+              onChange={(e) => onDateChange(e.target.value || null)}
+              className="flex-1 px-4 py-2.5 border-2 border-gray-200 rounded-lg transition-all font-medium hover:border-indigo-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 focus:outline-none"
+            />
+            {selectedDate && (
+              <button
+                onClick={() => onDateChange(null)}
+                className="px-4 py-2.5 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                title="Clear date filter"
+              >
+                ✕
+              </button>
+            )}
+          </div>
+        </div>
+
         {/* Sort */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -48,23 +74,23 @@ export function FilterBar({
           <div className="flex gap-2">
             <button
               onClick={() => onSortChange('date_desc')}
-              className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
+              className={`flex-1 px-4 py-2.5 rounded-lg font-medium transition-colors ${
                 sort === 'date_desc'
-                  ? 'bg-indigo-600 text-white'
+                  ? 'bg-indigo-600 text-white shadow-md'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              Newest First
+              Newest
             </button>
             <button
               onClick={() => onSortChange('date_asc')}
-              className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
+              className={`flex-1 px-4 py-2.5 rounded-lg font-medium transition-colors ${
                 sort === 'date_asc'
-                  ? 'bg-indigo-600 text-white'
+                  ? 'bg-indigo-600 text-white shadow-md'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              Oldest First
+              Oldest
             </button>
           </div>
         </div>

@@ -9,6 +9,7 @@ export function useExpenses() {
   const [categories, setCategories] = useState(['Food', 'Transport', 'Shopping', 'Entertainment', 'Health', 'Utilities', 'Other']);
   const [loadedCategories, setLoadedCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
   const [sort, setSort] = useState('date_desc');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -24,14 +25,20 @@ export function useExpenses() {
       setError(error);
       setExpenses([]);
     } else {
-      setExpenses(data || []);
+      // Filter by date if selected
+      let filteredData = data || [];
+      if (selectedDate) {
+        filteredData = filteredData.filter(exp => exp.date === selectedDate);
+      }
+      
+      setExpenses(filteredData);
       // Extract unique categories from loaded data
-      const uniqueCats = [...new Set(data.map(exp => exp.category))].sort();
+      const uniqueCats = [...new Set(filteredData.map(exp => exp.category))].sort();
       setLoadedCategories(uniqueCats);
     }
 
     setIsLoading(false);
-  }, [selectedCategory, sort]);
+  }, [selectedCategory, selectedDate, sort]);
 
   useEffect(() => {
     loadExpenses();
@@ -62,6 +69,10 @@ export function useExpenses() {
     setSort(newSort);
   }, []);
 
+  const updateDateFilter = useCallback((date) => {
+    setSelectedDate(date);
+  }, []);
+
   const calculateTotal = useCallback(() => {
     return expenses.reduce((sum, exp) => sum + parseFloat(exp.amount), 0);
   }, [expenses]);
@@ -79,11 +90,13 @@ export function useExpenses() {
     categories,
     loadedCategories,
     selectedCategory,
+    selectedDate,
     sort,
     isLoading,
     error,
     addExpense,
     updateFilters,
+    updateDateFilter,
     calculateTotal,
     calculateCategoryTotals,
     refetch: loadExpenses,

@@ -12,11 +12,13 @@ function App() {
     categories,
     loadedCategories,
     selectedCategory,
+    selectedDate,
     sort,
     isLoading,
     error,
     addExpense,
     updateFilters,
+    updateDateFilter,
     calculateTotal,
     calculateCategoryTotals,
   } = useExpenses();
@@ -34,6 +36,10 @@ function App() {
 
   const handleSortChange = (newSort) => {
     updateFilters(selectedCategory, newSort);
+  };
+
+  const handleDateChange = (date) => {
+    updateDateFilter(date);
   };
 
   return (
@@ -62,8 +68,10 @@ function App() {
         <FilterBar
           categories={categories}
           selectedCategory={selectedCategory}
+          selectedDate={selectedDate}
           sort={sort}
           onCategoryChange={handleCategoryChange}
+          onDateChange={handleDateChange}
           onSortChange={handleSortChange}
           loadedCategories={loadedCategories}
         />
