@@ -17,4 +17,4 @@ services:
     staticPublishPath: frontend/dist
     envVars:
       - key: VITE_API_URL
-        value: https://expense-tracker-backend.onrender.com
+        value: https://expense-tracker-backend-9f2h.onrender.com
