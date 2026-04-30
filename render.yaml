@@ -17,6 +17,6 @@ services:
     staticPublishPath: frontend/dist
     envVars:
       - key: VITE_API_URL
-        value: https://expense-tracker-backend-9f2h.onrender.com
+        value: https://expense-tracker-backend.onrender.com
       - key: BUILD_TIMESTAMP
-        value: "2026-04-30-force-redeploy"
+        value: "2026-04-30-use-correct-url"

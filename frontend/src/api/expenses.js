@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.VITE_API_URL || import.meta.env.VITE_API_URL || 'https://expense-tracker-backend-9f2h.onrender.com';
+const API_BASE_URL = process.env.VITE_API_URL || import.meta.env.VITE_API_URL || 'https://expense-tracker-backend.onrender.com';
 
 /**
  * Create an expense via POST /expenses
