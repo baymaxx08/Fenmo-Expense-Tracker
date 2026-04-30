@@ -142,8 +142,10 @@ export function AddExpenseForm({ onExpenseAdded, categories }) {
               placeholder="0.00"
               step="0.01"
               min="0.01"
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none ${
-                errors.amount ? 'border-red-500' : 'border-gray-300'
+              className={`w-full px-4 py-2.5 border-2 rounded-lg transition-all font-medium focus:outline-none ${
+                errors.amount
+                  ? 'border-red-400 focus:ring-2 focus:ring-red-200'
+                  : 'border-gray-200 hover:border-indigo-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100'
               }`}
             />
             {errors.amount && <p className="text-red-500 text-sm mt-1">{errors.amount}</p>}
@@ -154,18 +156,25 @@ export function AddExpenseForm({ onExpenseAdded, categories }) {
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Category
             </label>
-            <select
-              name="category"
-              value={formData.category}
-              onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none ${
-                errors.category ? 'border-red-500' : 'border-gray-300'
-              }`}
-            >
-              {categories.map(cat => (
-                <option key={cat} value={cat}>{cat}</option>
-              ))}
-            </select>
+            <div className="relative">
+              <select
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+                className={`w-full px-4 py-2.5 pr-10 border-2 rounded-lg appearance-none bg-white cursor-pointer transition-all font-medium focus:outline-none ${
+                  errors.category
+                    ? 'border-red-400 focus:ring-2 focus:ring-red-200'
+                    : 'border-gray-200 hover:border-indigo-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100'
+                }`}
+              >
+                {categories.map(cat => (
+                  <option key={cat} value={cat}>{cat}</option>
+                ))}
+              </select>
+              <svg className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </div>
             {errors.category && <p className="text-red-500 text-sm mt-1">{errors.category}</p>}
           </div>
 
@@ -179,8 +188,10 @@ export function AddExpenseForm({ onExpenseAdded, categories }) {
               name="date"
               value={formData.date}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none ${
-                errors.date ? 'border-red-500' : 'border-gray-300'
+              className={`w-full px-4 py-2.5 border-2 rounded-lg transition-all font-medium focus:outline-none ${
+                errors.date
+                  ? 'border-red-400 focus:ring-2 focus:ring-red-200'
+                  : 'border-gray-200 hover:border-indigo-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100'
               }`}
             />
             {errors.date && <p className="text-red-500 text-sm mt-1">{errors.date}</p>}
@@ -197,8 +208,10 @@ export function AddExpenseForm({ onExpenseAdded, categories }) {
               value={formData.description}
               onChange={handleChange}
               placeholder="What did you spend on?"
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none ${
-                errors.description ? 'border-red-500' : 'border-gray-300'
+              className={`w-full px-4 py-2.5 border-2 rounded-lg transition-all font-medium focus:outline-none ${
+                errors.description
+                  ? 'border-red-400 focus:ring-2 focus:ring-red-200'
+                  : 'border-gray-200 hover:border-indigo-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100'
               }`}
             />
             {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description}</p>}
