@@ -4,18 +4,25 @@ import expensesRouter from './routes/expenses.js';
 
 const app = express();
 
-// Middleware
-app.use(cors({
+// CORS Configuration
+const corsOptions = {
   origin: [
     'http://localhost:5173',
     'http://localhost:3000',
     'https://fenmo-expense-tracker-frontend-q83u.onrender.com',
     process.env.FRONTEND_URL || 'http://localhost:5173'
   ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-  allowedHeaders: ['Content-Type']
-}));
+  optionsSuccessStatus: 200
+};
+
+// Apply CORS middleware
+app.use(cors(corsOptions));
+
+// Explicitly handle preflight requests
+app.options('*', cors(corsOptions));
 
 app.use(express.json());
 
