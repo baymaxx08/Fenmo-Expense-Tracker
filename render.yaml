@@ -18,3 +18,5 @@ services:
     envVars:
       - key: VITE_API_URL
         value: https://expense-tracker-backend-9f2h.onrender.com
+      - key: BUILD_TIMESTAMP
+        value: "2026-04-30-force-redeploy"
